@@ -20,17 +20,22 @@ sudo openssl req \
 # Copiamos el archivo de configuracion de apache con SSL/TSL
 cp ../conf/default-ssl.conf /etc/apache2/sites-available
 
-# Lo habilitamos
+# Cambio la configuracion de apache para que todo el trafico sea redirigido a https
+cp ../conf/000-default.conf /etc/apache2/sites-available
+
+# Habilitamos el archivo default-ssl.conf
 a2ensite default-ssl.conf
 
 # Hablimitamos el modulo SSL/TSL
 a2enmod ssl
 
-# Cambio la configuracion de apache para que todo el trafico sea redirigido a https
-cp ../conf/000-default.conf /etc/apache2/sites-available
-
 # Habilitamos el modulo rewrite
 a2enmod rewrite
+
+a2dissite 000-default-htaccess.conf
+
+# Habilitamos el archivo 000-default
+a2ensite 000-default.conf
 
 # Reiniciamos apache
 systemctl restart apache2
