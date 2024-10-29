@@ -8,7 +8,7 @@ apt update
 apt upgrade -y # La respuesta yes
 
 # Creamos el certificado autofirmado
-sudo openssl req \
+openssl req \
   -x509 \
   -nodes \
   -days 365 \
